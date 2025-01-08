@@ -1,0 +1,38 @@
+{
+  "name": "carlosor/main-gpt",
+  "description": "Main GTP",
+  "version": "1.1.0",
+  "homepage": "https://main-ai-headless-next-js.vercel.app/",
+  "type": "software",
+  "license": "LGPL-3.0-only",
+  "authors": [
+    {
+      "name": "Carlos Ortiz",
+      "email": "carlosor@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "symfony/dependency-injection": "^6.2",
+    "guzzlehttp/guzzle": "^7.0",
+    "smalot/pdfparser": "^2.5",
+    "justinrainbow/json-schema": "^5.2",
+    "gioni06/gpt3-tokenizer": "^1.2"
+  },
+  "require-dev": {
+    "phpmd/phpmd": "@stable",
+    "mockery/mockery": "^1.4",
+    "pestphp/pest-plugin": "^3.0",
+    "pestphp/pest": "^3.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "MainGPT\\": "src/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
+  }
+}

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24"
+    viewBox="0 0 413 413">
+    <defs>
+        <linearGradient id="hall-9000-gradient" x1="1" y1="1" x2="0.081" y2="0.124"
+            gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="#6d86d6" />
+            <stop offset="1" stop-color="#48c4ee" />
+        </linearGradient>
+    </defs>
+    <rect fill="url(#hall-9000-gradient)" width="413" height="413" rx="206.5" />
+    <circle fill="#fff" cx="74.189" cy="74.189" r="74.189" transform="translate(131.178 134.023)" />
+    <circle fill="#fff" cx="35.382" cy="35.382" r="35.382" transform="translate(278.414 96.358)" />
+    <path fill="#fff"
+        d="M132.445,0C61.11,0,2.9,58.209,2.9,129.545S61.11,259.089,132.445,259.089,261.989,200.88,261.989,129.545,203.78,0,132.445,0Zm0,245.393A115.848,115.848,0,1,1,248.293,129.545,115.932,115.932,0,0,1,132.445,245.393Z"
+        transform="translate(72.922 76.955)" />
+</svg>

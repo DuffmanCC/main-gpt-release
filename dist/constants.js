@@ -1,0 +1,1 @@
+const e=[{label:"Always",value:"always"},{label:"Never",value:"never"},{label:"Configurable",value:"configurable"}],a=["euclidean","cosine","dotproduct"],n=["marketing","operational","3rd-pard-marketing"];export{e as a,n as c,a as p};

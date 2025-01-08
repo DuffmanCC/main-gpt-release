@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "properties": {
+    "metric": {
+      "type": "string",
+      "enum": ["euclidean", "cosine", "dotproduct"]
+    }
+  },
+  "required": ["metric"]
+}

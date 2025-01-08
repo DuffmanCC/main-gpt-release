@@ -1,0 +1,94 @@
+{
+  "type": "object",
+  "properties": {
+    "isActive": {
+      "type": "boolean"
+    },
+    "modelName": {
+      "type": "string",
+      "enum": ["gpt-4", "gpt-3.5-turbo"]
+    },
+    "pineconeIndex": {
+      "type": "string",
+      "patern": "^[a-z0-9-]+$"
+    },
+    "topK": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 100
+    },
+    "initMessage": {
+      "type": "string"
+    },
+    "primerPrompt": {
+      "type": "string"
+    },
+    "hasAiChat": {
+      "type": "boolean"
+    },
+    "allowAiChatCampaigns": {
+      "type": "boolean"
+    },
+    "aiChatCampaigns": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "limitChat": {
+      "type": "boolean"
+    },
+    "questionsLimit": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "beforeFormMessage": {
+      "type": "string"
+    },
+    "showContactForm": {
+      "type": "boolean"
+    },
+    "formFields": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "allowAiContactCampaigns": {
+      "type": "boolean"
+    },
+    "aiContactCampaigns": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "afterFormMessageSuccess": {
+      "type": "string"
+    },
+    "afterFormMessageError": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "isActive",
+    "modelName",
+    "pineconeIndex",
+    "topK",
+    "primerPrompt",
+    "initMessage",
+    "hasAiChat",
+    "allowAiChatCampaigns",
+    "limitChat",
+    "aiChatCampaigns",
+    "questionsLimit",
+    "beforeFormMessage",
+    "showContactForm",
+    "formFields",
+    "allowAiContactCampaigns",
+    "aiContactCampaigns",
+    "afterFormMessageError",
+    "afterFormMessageSuccess"
+  ]
+}

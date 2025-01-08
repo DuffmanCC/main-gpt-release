@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        https://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <parameters>
+        <parameter key="app.openai.embed.api">https://api.openai.com/v1/embeddings</parameter>
+        <parameter key="app.openai.chatCompletion.api">https://api.openai.com/v1/chat/completions</parameter>
+
+        <parameter key="app.init_list" type="collection">
+            <!--    Page    -->
+            <parameter>mainAiPage</parameter>
+            <parameter>aiMemoryPage</parameter>
+            <parameter>aiChatterPage</parameter>
+            <parameter>aiChatPage</parameter>
+            <parameter>aiContactPage</parameter>
+            <parameter>aiCampaignPage</parameter>
+            <parameter>aiSettingsPage</parameter>
+            <!--    /Page    -->
+
+            <!--    Ajax    -->
+            <parameter>pluginSettingsAjax</parameter>
+            <parameter>tokenizePostsAjax</parameter>
+            <parameter>embedDataAjax</parameter>
+            <parameter>upsertVectorAjax</parameter>
+            <parameter>chatBotAjax</parameter>
+            <parameter>createAiChatAjax</parameter>
+            <parameter>createAiContactAjax</parameter>
+            <parameter>recordAiChatAjax</parameter>
+            <parameter>tokenizingPercentageAjax</parameter>
+            <parameter>embeddingPercentageAjax</parameter>
+            <parameter>createIndexAjax</parameter>
+            <parameter>saveAiMemoryAjax</parameter>
+            <parameter>uploadFileAjax</parameter>
+            <!--    /Ajax    -->
+
+            <!--    Shortcode    -->
+            <parameter>shortcode</parameter>
+            <!--    /Shortcode    -->
+
+            <!--    PostType    -->
+            <parameter>aiMemoryPostType</parameter>
+            <parameter>aiChatterPostType</parameter>
+            <parameter>aiChatPostType</parameter>
+            <parameter>aiCampaignPostType</parameter>
+            <parameter>aiContactPostType</parameter>
+            <!--    /PostType    -->
+
+            <!--    MetaBox    -->
+            <parameter>aiMemoryBox</parameter>
+            <parameter>aiChatterBox</parameter>
+            <parameter>aiGdprCampaignBox</parameter>
+            <parameter>aiChatBox</parameter>
+            <parameter>aiContactsBox</parameter>
+            <!--    /MetaBox    -->
+        </parameter>
+    </parameters>
+
+    <services>
+        <!--    Repository    -->
+        <service id="config" class="MainGPT\Repository\Config"/>
+        <!--    /Repository    -->
+
+        <!--    Service    -->
+        <service id="guzzleClient" class="GuzzleHttp\Client"/>
+        <service id="mainAiTokenizerClient" class="MainGPT\Service\Gpt3TokenizerClient"/>
+        <service id="openAiClient" class="MainGPT\Service\OpenAiClient">
+            <argument type="service" id="config"/>
+            <argument type="service" id="guzzleClient"/>
+            <argument>%app.openai.embed.api%</argument>
+            <argument>%app.openai.chatCompletion.api%</argument>
+        </service>
+        <service id="pineconeClient" class="MainGPT\Service\PineconeClient">
+            <argument type="service" id="config"/>
+            <argument type="service" id="guzzleClient"/>
+        </service>
+        <!--    /Service    -->
+
+        <!--    Page    -->
+        <service id="mainAiPage" class="MainGPT\Page\Admin\MainAiPage" />
+        <service id="aiMemoryPage" class="MainGPT\Page\Admin\AiMemoryPage" />
+        <service id="aiChatterPage" class="MainGPT\Page\Admin\AiChatterPage" />
+        <service id="aiChatPage" class="MainGPT\Page\Admin\AiChatPage" />
+        <service id="aiContactPage" class="MainGPT\Page\Admin\AiContactPage" />
+        <service id="aiCampaignPage" class="MainGPT\Page\Admin\AiCampaignPage" />
+        <service id="aiSettingsPage" class="MainGPT\Page\Admin\AiSettingsPage"/>
+        <!--    /Page    -->
+
+        <!--    Ajax    -->
+        <service id="pluginSettingsAjax" class="MainGPT\Ajax\Admin\PluginSettingsAjax"/>
+        <service id="tokenizePostsAjax" class="MainGPT\Ajax\Admin\TokenizePostsAjax">
+            <argument type="service" id="mainAiTokenizerClient"/>
+        </service>
+        <service id="tokenizingPercentageAjax" class="MainGPT\Ajax\Admin\TokenizingPercentageAjax"/>
+        <service id="embedDataAjax" class="MainGPT\Ajax\Admin\EmbedDataAjax">
+            <argument type="service" id="openAiClient"/>
+        </service>
+        <service id="embeddingPercentageAjax" class="MainGPT\Ajax\Admin\EmbeddingPercentageAjax"/>
+        <service id="upsertVectorAjax" class="MainGPT\Ajax\Admin\UpsertVectorAjax">
+            <argument type="service" id="openAiClient"/>
+            <argument type="service" id="pineconeClient"/>
+        </service>
+        <service id="uploadFileAjax" class="MainGPT\Ajax\Admin\UploadFileAjax"/>
+        <service id="chatBotAjax" class="MainGPT\Ajax\Public\ChatBotAjax">
+            <argument type="service" id="openAiClient"/>
+            <argument type="service" id="pineconeClient"/>
+        </service>
+        <service id="createAiChatAjax" class="MainGPT\Ajax\Public\CreateAiChatAjax"/>
+        <service id="createAiContactAjax" class="MainGPT\Ajax\Public\CreateAiContactAjax"/>
+        <service id="recordAiChatAjax" class="MainGPT\Ajax\Public\RecordAiChatAjax"/>
+        <service id="createIndexAjax" class="MainGPT\Ajax\Admin\CreateIndexAjax">
+            <argument type="service" id="openAiClient"/>
+            <argument type="service" id="pineconeClient"/>
+        </service>
+        <service id="saveAiMemoryAjax" class="MainGPT\Ajax\Admin\SaveAiMemoryAjax" />
+        <!--    /Ajax    -->
+
+        <!--    Shortcode    -->
+        <service id="shortcode" class="MainGPT\Shortcode\Shortcode" />
+        <!--    /Shortcode    -->
+
+        <!--    PostType    -->
+        <service id="aiMemoryPostType" class="MainGPT\PostType\AiMemory"/>
+        <service id="aiChatterPostType" class="MainGPT\PostType\AiChatter"/>
+        <service id="aiChatPostType" class="MainGPT\PostType\AiChat"/>
+        <service id="aiCampaignPostType" class="MainGPT\PostType\AiCampaign"/>
+        <service id="aiContactPostType" class="MainGPT\PostType\AiContact"/>
+        <!--    /PostType    -->
+
+        <!--    MetaBox  -->
+        <service id="aiMemoryBox" class="MainGPT\MetaBox\AiMemoryBox"/>
+        <service id="aiChatterBox" class="MainGPT\MetaBox\AiChatterBox"/>
+        <service id="aiGdprCampaignBox" class="MainGPT\MetaBox\AiCampaignBox"/>
+        <service id="aiChatBox" class="MainGPT\MetaBox\AiChatBox"/>
+        <service id="aiContactsBox" class="MainGPT\MetaBox\AiContactBox"/> 
+        <!--    /MetaBox  -->
+    </services>
+</container>
